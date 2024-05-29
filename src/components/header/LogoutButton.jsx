@@ -1,5 +1,5 @@
 import React from "react";
-import authService, { logout } from "../../appwrite/auth";
+import authService from "../../appwrite/auth";
 import { useDispatch } from "react-redux";
 
 function LogoutButton() {

@@ -1,12 +1,13 @@
 import React from "react";
 import Container from "../container/Container";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import authService from "../../appwrite/auth";
 import { useSelector } from "react-redux";
-import { Logo } from "../Logo";
+import Logo from "../Logo";
 import LogoutButton from "./LogoutButton";
 
 function Header() {
+  console.log("Header");
   const authStatus = useSelector((state) => state.auth.status);
 
   const navigate = useNavigate();

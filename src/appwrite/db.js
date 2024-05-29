@@ -10,7 +10,7 @@ export class DbService {
       .setEndpoint(conf.appwriteUrl)
       .setProject(conf.appwriteProjectId);
 
-    this.databases = new Databases(client);
+    this.databases = new Databases(this.client);
   }
 
   async getPost(slug) {

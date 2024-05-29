@@ -30,7 +30,7 @@ export default function PostForm({ post }) {
         : null;
 
       if (file) {
-        storageService.deletFile(post.featuredImage);
+        await storageService.deletFile(post.featuredImage);
       }
 
       const dbPost = await dbService.updatePost(post.$id, {
@@ -101,7 +101,7 @@ export default function PostForm({ post }) {
       </div>
       <div className="w-1/3">
         <input
-          lable="Featured Image"
+          label="Featured Image"
           type="file"
           accept="image/png, image/jpg, image/jpeg"
           {...register("image", { required: !post })}
