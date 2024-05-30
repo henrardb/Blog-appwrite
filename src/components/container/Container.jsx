@@ -1,7 +1,7 @@
 import React from "react";
 
 function Container({ children }) {
-  console.log("Container");
+  //console.log("Container");
   return <div>{children}</div>;
 }
 

@@ -5,12 +5,13 @@ import { Editor } from "@tinymce/tinymce-react";
 function RTE({ name, control, label, defaultValue = "" }) {
   return (
     <div className="w-full">
-      {label && <label>{lable}</label>}
+      {label && <label>{label}</label>}
       <Controller
         name={name || "content"}
         control={control}
         render={({ field: { onChange } }) => (
           <Editor
+            apiKey="cik387dgi7qcqbo3fk5q3l1ntx128ke2nlroeea31f5akhem"
             initialValue={defaultValue}
             init={{
               branding: false,

@@ -4,7 +4,7 @@ import Container from "../components/container/Container";
 import PostCard from "../components/PostCard";
 
 function Home() {
-  console.log("Home");
+  //console.log("Home");
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     dbService.getPosts([]).then((posts) => {
@@ -14,7 +14,7 @@ function Home() {
     });
   }, []);
   if (posts.length === 0) {
-    console.log("posts.length === 0");
+    //console.log("posts.length === 0");
     return (
       <div>
         <Container>

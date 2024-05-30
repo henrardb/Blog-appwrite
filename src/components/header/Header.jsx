@@ -7,7 +7,7 @@ import Logo from "../Logo";
 import LogoutButton from "./LogoutButton";
 
 function Header() {
-  console.log("Header");
+  //console.log("Header");
   const authStatus = useSelector((state) => state.auth.status);
 
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ function Header() {
   ];
 
   return (
-    <header>
+    <header className="bg-slate-600 text-white w-full">
       <Container>
         <nav>
           <div>

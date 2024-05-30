@@ -7,9 +7,9 @@ function Select({ options, label, className, ...props }, ref) {
       {label && <label htmlFor={id}>{label}</label>}
       <select {...props} id={id} ref={ref} className={className}>
         {options.map((option) => (
-          <options key={option} value={option}>
+          <option key={option} value={option}>
             {option}
-          </options>
+          </option>
         ))}
       </select>
     </div>

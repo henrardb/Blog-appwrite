@@ -7,6 +7,7 @@ import RTE from "../RTE";
 import storageService from "../../appwrite/storage";
 import dbService from "../../appwrite/db";
 import Button from "../Button";
+import Select from "../Select";
 
 export default function PostForm({ post }) {
   const { register, handleSubmit, watch, setValue, control, getValues } =
@@ -28,11 +29,9 @@ export default function PostForm({ post }) {
       const file = data.image[0]
         ? await storageService.uploadFile(data.image[0])
         : null;
-
       if (file) {
         await storageService.deletFile(post.featuredImage);
       }
-
       const dbPost = await dbService.updatePost(post.$id, {
         ...data,
         featuredImage: file ? file.$id : undefined,
@@ -49,7 +48,6 @@ export default function PostForm({ post }) {
           ...data,
           userId: userData.$id,
         });
-
         if (dbPost) {
           navigate(`/post/${dbPost.$id}`);
         }
@@ -57,21 +55,33 @@ export default function PostForm({ post }) {
     }
   };
 
-  const slugTransform = useCallback(() => {
-    if (value && typeof value === "string") return;
-    value
-      .trim()
-      .toLowerCase()
-      .replace(/[^a-zA-Z\d\s]+/g, "-")
-      .replace(/\s/g, "-");
+  const slugTransform = useCallback((value) => {
+    //console.log(`slugTransform: ${value}`);
+    try {
+      if (value && typeof value === "string")
+        return value
+          .trim()
+          .toLowerCase()
+          .replace(/[^a-zA-Z\d\s]+/g, "-")
+          .replace(/\s/g, "-");
+    } catch (error) {
+      console.log(`PostForm :: slugTransform :: ${error}`);
+    }
   }, []);
 
   React.useEffect(() => {
-    watch((value, { name }) => {
-      if (name === "title") {
-        setValue("slug", slugTransform(value.title), { shouldValidate: true });
-      }
-    });
+    try {
+      watch((value, { name }) => {
+        if (name === "title") {
+          setValue("slug", slugTransform(value.title), {
+            shouldValidate: true,
+          });
+        }
+        //console.log(`useEffect :: watch :: ${name} with value ${value.title}`);
+      });
+    } catch (error) {
+      console.log(`PostForm :: useEffect :: ${error}`);
+    }
   }, [watch, slugTransform, setValue]);
 
   return (
@@ -80,11 +90,13 @@ export default function PostForm({ post }) {
         <Input
           label="Title"
           placeholder="Title"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg p-1"
           {...register("title", { required: true })}
         />
         <Input
           label="Slug: "
           placeholder="Slug"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg p-1"
           {...register("slug", { required: true })}
           onInput={(e) => {
             setValue("slug", slugTransform(e.currentTarget.value), {
@@ -103,6 +115,7 @@ export default function PostForm({ post }) {
         <input
           label="Featured Image"
           type="file"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg p-1"
           accept="image/png, image/jpg, image/jpeg"
           {...register("image", { required: !post })}
         />

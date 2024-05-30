@@ -30,12 +30,20 @@ function LoginComponent() {
     <div>
       {error && <p>{error}</p>}
       <form onSubmit={handleSubmit(submit)}>
-        <input type="text" {...register("name", { required: true })}>
-          Name:
-        </input>
-        <input type="password" {...register("password", { required: true })}>
-          Password:
-        </input>
+        <input
+          type="text"
+          label="Email: "
+          placeholder="Email"
+          {...register("email", { required: true })}
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg p-1"
+        />
+        <input
+          type="password"
+          label="Password: "
+          placeholder="password"
+          {...register("password", { required: true })}
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg p-1"
+        />
         <Button type="button">Login</Button>
       </form>
     </div>
