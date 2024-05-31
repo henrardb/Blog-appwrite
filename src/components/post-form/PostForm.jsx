@@ -10,9 +10,10 @@ import Button from "../Button";
 import Select from "../Select";
 
 export default function PostForm({ post }) {
+  console.log(post);
   const { register, handleSubmit, watch, setValue, control, getValues } =
     useForm({
-      defaulValues: {
+      defaultValues: {
         title: post?.title || "",
         slug: post?.slug || "",
         content: post?.content || "",
@@ -25,6 +26,7 @@ export default function PostForm({ post }) {
   const userData = useSelector((state) => state.auth.userData);
 
   const submit = async (data) => {
+    console.log(`PostForm :: submit :: ${data}`);
     if (post) {
       const file = data.image[0]
         ? await storageService.uploadFile(data.image[0])
@@ -88,7 +90,7 @@ export default function PostForm({ post }) {
     <form onSubmit={handleSubmit(submit)}>
       <div className="w-2/3">
         <Input
-          label="Title"
+          label="Title: "
           placeholder="Title"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg p-1"
           {...register("title", { required: true })}

@@ -68,7 +68,7 @@ export class DbService {
     try {
       await this.databases.deleteDocument(
         conf.appwriteDatabaseId,
-        conf.appwriteDatabaseId,
+        conf.appwriteCollectionId,
         slug
       );
       return true;

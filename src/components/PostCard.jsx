@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import storageService from "../appwrite/storage";
 
-function PostCard({ id, title, featuredImage }) {
+function PostCard({ $id, title, featuredImage }) {
   return (
-    <Link to={`/post/${id}`}>
+    <Link to={`/post/${$id}`}>
       <div>
         <img src={storageService.getFilePreview(featuredImage)} alt={title} />
         <h2>{title}</h2>

@@ -24,7 +24,7 @@ function EditPost() {
   return (
     <div>
       <Container>
-        <PostForm post={post}></PostForm>
+        <PostForm post={post} />
       </Container>
     </div>
   );
